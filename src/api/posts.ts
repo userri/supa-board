@@ -12,7 +12,7 @@ export const getPosts = async (): Promise<Post[]> => {
   const { data, error } = await supabase
     .from("posts")
     .select("*")
-    .order("createdAt", { ascending: false });
+    .order("created_at", { ascending: false });
 
   if (error) throw error;
   return data || [];
@@ -24,19 +24,22 @@ export const createPost = async (
 ): Promise<Post> => {
   const { data, error } = await supabase
     // post 테이블에 새로 저장
-    .from("post")
+    .from("posts")
     // 하나를 보내더라도 배열로 보내기
     .insert([newPost])
     .select()
     // 저장한 객체를 하나만 가져오기
     .single();
-  if (error) throw error;
+  if (error) {
+    console.error("[createPost] Supabase error:", error);
+    throw error;
+  }
   return data;
 };
 
 // 포스트 한 개 가져오기
-const getPost = async (id: number): Promise<Post> => {
-  const { data, error } = supabase
+export const getPost = async (id: number): Promise<Post> => {
+  const { data, error } = await supabase
     .from("posts")
     .select("*")
     // sql where과 동일

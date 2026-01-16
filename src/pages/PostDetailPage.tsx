@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getPosts } from "../api/posts";
+import { getPost } from "../api/posts";
 
 export default function PostDetailPage() {
   const { id } = useParams();
   const { data: post, isLoading } = useQuery({
-    queryKey: ["post", id],
-    queryFn: () => getPosts(Number(id)),
+    queryKey: ["posts", id],
+    queryFn: () => getPost(Number(id)),
   });
 
   if (isLoading) return <div>로딩 중...</div>;

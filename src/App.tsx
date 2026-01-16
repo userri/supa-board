@@ -13,7 +13,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<PostListPage />} />
-        <Route path="/post/:id" element={<PostDetailPage />} />
+        <Route path="/posts/:id" element={<PostDetailPage />} />
         <Route path="/create" element={<PostCreatePage />} />
       </Routes>
     </BrowserRouter>

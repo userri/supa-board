@@ -15,6 +15,10 @@ export default function PostCreatePage() {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       navigate("/");
     },
+    onError: (err: any) => {
+      console.error("[mutation error],", err);
+      alert(err?.message ?? "작성 실패");
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,8 +35,8 @@ export default function PostCreatePage() {
         required
       />
       <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         placeholder="내용"
         required
       />

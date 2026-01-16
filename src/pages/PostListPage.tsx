@@ -22,11 +22,10 @@ export default function PostListPage() {
       <ul>
         {posts?.map((post) => (
           <li key={post.id}>
-            <Link to={`/post/${post.id}`}>
+            <Link to={`/posts/${post.id}`}>
               <h2>{post.title}</h2>
+              <p>{new Date(post.created_at).toLocaleDateString()}</p>
             </Link>
-            <h2>{post.title}</h2>
-            <p>{new Date(post.created_at).toLocaleDateString()}</p>
           </li>
         ))}
       </ul>
